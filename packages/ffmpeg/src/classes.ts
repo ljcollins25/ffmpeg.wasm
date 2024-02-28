@@ -61,6 +61,7 @@ export class FFmpeg {
             break;
           case FFMessageType.MOUNT:
           case FFMessageType.UNMOUNT:
+          case FFMessageType.CREATE_LAZY_FILE:
           case FFMessageType.EXEC:
           case FFMessageType.WRITE_FILE:
           case FFMessageType.READ_FILE:
@@ -324,6 +325,28 @@ export class FFmpeg {
       trans
     ) as Promise<OK>;
   };
+
+  /**
+   * Creates a file that will be loaded lazily on first access from a given URL or local file system path.
+   *
+   * @category File System
+   */
+  public createLazyFile = (
+    parent: string,
+    name: string,
+    url: string,
+    canRead: boolean,
+    canWrite: boolean,
+    { signal }: FFMessageOptions = {}
+  ): Promise<OK> =>
+    this.#send(
+      {
+        type: FFMessageType.CREATE_LAZY_FILE,
+        data: { parent, name, url, canRead, canWrite },
+      },
+      undefined,
+      signal
+    ) as Promise<OK>;
 
   /**
    * Read data from ffmpeg.wasm.

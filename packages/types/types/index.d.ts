@@ -66,6 +66,7 @@ export interface FS {
   mkdir: (path: string) => void;
   rmdir: (path: string) => void;
   rename: (oldPath: string, newPath: string) => void;
+  createLazyFile: (parent: string, name: string, url: string, canRead: boolean, canWrite: boolean) => void;
   writeFile: (path: string, data: Uint8Array | string) => void;
   readFile: (path: string, opts: OptionReadFile) => Uint8Array | string;
   readdir: (path: string) => string[];

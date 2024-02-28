@@ -16,6 +16,7 @@ import type {
   FFMessageDeleteDirData,
   FFMessageMountData,
   FFMessageUnmountData,
+  FFMessageCreateLazyFileData,
   CallbackData,
   IsFirst,
   OK,
@@ -155,6 +156,11 @@ const unmount = ({ mountPoint }: FFMessageUnmountData): OK => {
   return true;
 };
 
+const createLazyFile = ({ parent, name, url, canRead, canWrite }: FFMessageCreateLazyFileData): OK => {
+  ffmpeg.FS.createLazyFile(parent, name, url, canRead, canWrite);
+  return true;
+};
+
 self.onmessage = async ({
   data: { id, type, data: _data },
 }: FFMessageEvent): Promise<void> => {
@@ -197,6 +203,9 @@ self.onmessage = async ({
       case FFMessageType.UNMOUNT:
         data = unmount(_data as FFMessageUnmountData);
         break;
+      case FFMessageType.CREATE_LAZY_FILE:
+          data = createLazyFile(_data as FFMessageCreateLazyFileData);
+          break;
       default:
         throw ERROR_UNKNOWN_MESSAGE_TYPE;
     }

@@ -64,6 +64,14 @@ export interface FFMessageListDirData {
   path: FFFSPath;
 }
 
+export interface FFMessageCreateLazyFileData {
+  parent: FFFSPath;
+  name: string;
+  url: string;
+  canRead: boolean;
+  canWrite: boolean;
+}
+
 /**
  * @remarks
  * Only deletes empty directory.
@@ -118,7 +126,8 @@ export type FFMessageData =
   | FFMessageListDirData
   | FFMessageDeleteDirData
   | FFMessageMountData
-  | FFMessageUnmountData;
+  | FFMessageUnmountData
+  | FFMessageCreateLazyFileData;
 
 export interface Message {
   type: string;

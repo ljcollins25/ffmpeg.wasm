@@ -21,4 +21,5 @@ export enum FFMessageType {
   LOG = "LOG",
   MOUNT = "MOUNT",
   UNMOUNT = "UNMOUNT",
+  CREATE_LAZY_FILE = "CREATE_LAZY_FILE",
 }
