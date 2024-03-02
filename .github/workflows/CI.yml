@@ -21,7 +21,9 @@ jobs:
     - name: Checkout Source Code
       uses: actions/checkout@v2
     - name: Build ffmpeg
-      run: npm run build
+      run: |
+        npm install
+        npm run build
       working-directory: packages/ffmpeg
     - name: Upload ffmpeg
       uses: actions/upload-artifact@v2
